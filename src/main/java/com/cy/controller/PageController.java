@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping("/")
 public class PageController {
-    @RequestMapping("/a")
     public String testSpringmvc(){
         return "index";
     }
-    @RequestMapping("/{pageName}")
+    @RequestMapping("{pageName}")
     public String testSpringmvc1(@PathVariable String pageName){
         return pageName;
     }

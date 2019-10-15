@@ -5,16 +5,17 @@
                 <h3 class="box-title">房间管理</h3>
 
                 <div class="box-tools">
-                    <div class="input-group input-group-sm" style="width: 350px;">
-                        <input type="text" name="table_search" id="searchRoomId"
-                               class="form-control pull-right" placeholder="房间号">
+                    <div class="input-group input-group-sm" >
+                        <!--<input type="text" name="table_search" id="searchRoomId"
+                               class="form-control pull-right" placeholder="房间号" style="width: 5px">
+                        <input type="text" name="table_search" id="searchRoomProperty"
+                               class="form-control pull-right" placeholder="房间属性" style="width: 5px">-->
+                        <div class="input-group-btn" align="right">
+                            <!--<button type="button" class="btn btn-default btn-search">
+                                <i class="fa fa-search">查询</i>-->
+                            <button type="button" class="btn btn-default btn-search">查询</button>
 
-
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-search">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            <button type="button" class="btn btn-default btn-delete">删除</button>
+                            <button type="button" class="btn btn-default btn-delete">重置</button>
                         </div>
                     </div>
                 </div>
@@ -56,12 +57,12 @@
         });
     })
     function doGetObjects(){
-        //debugger;//断点调试
-        //1.定义url和参数
-        var url="room/doFindPageObjects"
-        var params={"pageCurrent":1};//pageCurrent=2
-        //2.发起异步请求
-        //请问如下ajax请求的回调函数参数名可以是任意吗？可以,必须符合标识符的规范
+        var pageCurrent=$("#pageId").data("pageCurrent");
+        if(!pageCurrent){ pageCurrent=1;}
+        var params={"pageCurrent":pageCurrent};
+        var username=$("#searchNameId").val();
+        if(username)params.username=username;
+        var url="room/doFindPageObjects";
         $.getJSON(url,params,function(result){
 //JsonResult->PageObject->List<SysLogs>+...
                 //请问result是一个字符串还是json格式的js对象？对象
@@ -120,30 +121,9 @@
         //重用js代码，简化jS代码编写。
         doGetObjects();
     }
-    function doGetObjects(){
-        //debugger;//断点调试
-        //1.定义url和参数
-        var url="room/doFindPageObjects"
-        //? 请问data函数的含义是什么？(从指定元素上获取绑定的数据)
-        //此数据会在何时进行绑定？(setPagination,doQueryObjects)
-        var pageCurrent=$("#pageId").data("pageCurrent");
-        //为什么要执行如下语句的判定，然后初始化pageCurrent的值为1
-        //pageCurrent参数在没有赋值的情况下，默认初始值应该为1.
-        if(!pageCurrent) pageCurrent=1;
-        var params={"pageCurrent":pageCurrent};
-        //为什么此位置要获取查询参数的值?
-        //一种冗余的应用方法，目的时让此函数在查询时可以重用。
-        var username=$("#searchNameId").val();
-        //如下语句的含义是什么？动态在js对象中添加key/value,
-        if(username) params.username=username;//查询时需要
-        //2.发起异步请求
-        //请问如下ajax请求的回调函数参数名可以是任意吗？可以,必须符合标识符的规范
-        $.getJSON(url,params,function(result){
-                //请问result是一个字符串还是json格式的js对象？对象
-                doHandleResponseResult(result);
-            }
-        );
-    }
+
+
+
     $(".input-group-btn")
         .on("click",".btn-delete",doDeleteObjects)
     /*执行删除操作*/
