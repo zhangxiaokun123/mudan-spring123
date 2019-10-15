@@ -15,4 +15,14 @@ public class PageController {
     public String testSpringmvc1(@PathVariable String pageName){
         return pageName;
     }
+    @RequestMapping("{module}/{moduleUI}")
+    public String doMenuUI(@PathVariable String moduleUI){
+        return "sys/"+moduleUI;
+    }
+    @RequestMapping("doPageUI")
+    public String doPageUI(){
+        return "common/page";
+    }
 }
+
+

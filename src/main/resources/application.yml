@@ -9,9 +9,9 @@ server:
 #spring
 spring:
   datasource:
-    url: jdbc:mysql:///mudandb?serverTimezone=GMT
+    url: jdbc:mysql:///dbroom?serverTimezone=GMT
     username: root
-    password: 456789
+    password: ROOT
   thymeleaf:
     prefix: classpath:/templates/pages/
     suffix: .html
@@ -22,7 +22,7 @@ mybatis:
     default-statement-timeout: 30
     map-underscore-to-camel-case: true
   mapper-locations:
-  - classpath:/mybatis/sys/*.xml
+  - classpath:/mapper/*.xml
 
 #lOG
 logging:
