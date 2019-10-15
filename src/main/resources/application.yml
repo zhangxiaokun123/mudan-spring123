@@ -9,9 +9,9 @@ server:
 #spring
 spring:
   datasource:
-    url: jdbc:mysql:///dbroom?serverTimezone=GMT
+    url: jdbc:mysql:///mudandb?serverTimezone=GMT
     username: root
-    password: ROOT
+    password: 456789
   thymeleaf:
     prefix: classpath:/templates/pages/
     suffix: .html
